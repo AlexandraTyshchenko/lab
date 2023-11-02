@@ -14,7 +14,7 @@ namespace WebApplication1.entities
         }
         public DayOfWeek Day { get; set; }
         public int? NumberInOrder { get; set; }
-        public string Classroom { get; set; }
+        public string? Classroom { get; set; }
         public int? SubjectTeacherId { get; set; }
         public SubjectTeacher SubjectTeacher { get; set; }
         public int? GroupId { get; set; }

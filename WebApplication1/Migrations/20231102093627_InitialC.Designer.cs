@@ -12,8 +12,8 @@ using WebApplication1.dbContext;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231101184853_InitialCreate2")]
-    partial class InitialCreate2
+    [Migration("20231102093627_InitialC")]
+    partial class InitialC
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,8 +55,9 @@ namespace WebApplication1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Classroom")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Day")
@@ -74,6 +75,10 @@ namespace WebApplication1.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("SubjectTeacherId");
 
                     b.ToTable("Schedules");
                 });
@@ -169,14 +174,14 @@ namespace WebApplication1.Migrations
                 {
                     b.HasOne("WebApplication1.entities.Group", "Group")
                         .WithMany("Schedules")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("WebApplication1.entities.SubjectTeacher", "SubjectTeacher")
                         .WithMany("Schedules")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("SubjectTeacherId")
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Group");
@@ -189,7 +194,7 @@ namespace WebApplication1.Migrations
                     b.HasOne("WebApplication1.entities.Group", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Group");
                 });
@@ -199,13 +204,13 @@ namespace WebApplication1.Migrations
                     b.HasOne("WebApplication1.entities.Subject", "Subject")
                         .WithMany("SubjectTeachers")
                         .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.HasOne("WebApplication1.entities.Teacher", "Teacher")
                         .WithMany("Subjects")
                         .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 
                     b.Navigation("Subject");

@@ -17,28 +17,23 @@ namespace WebApplication1.Services
 
         public async Task CreateScheduleAsync(string groupName)
         {
-            var result = await _dbContext.Groups.Include(x => x.Schedules).FirstOrDefaultAsync(x => x.Name == groupName);
-            if (result == null)
+            var result = await _dbContext.Groups.FirstOrDefaultAsync(x => x.Name == groupName);
+            //if (result == null)
+            //{
+            //    throw new NotFoundException("group not found");
+            //}
+
+            Schedule newSchedule = new Schedule
             {
-                throw new NotFoundException("group not found");
-            }
-            if (result.Schedules.Count != 0)
-            {
-                throw new Exception("Schedule for the current group already exists");
-            }
+                Day = Schedule.DayOfWeek.Monday,
+                NumberInOrder = 1,
+                Classroom = "A101",
+                GroupId=result.Id
+            };
 
-
-            var schedules = new List<Schedule>
-        {
-            new Schedule() { Day = Schedule.DayOfWeek.Monday,Group=result},
-            new Schedule() { Day = Schedule.DayOfWeek.Tuesday,Group=result},
-            new Schedule() { Day = Schedule.DayOfWeek.Wednesday,Group=result},
-            new Schedule() { Day = Schedule.DayOfWeek.Thursday, Group = result },
-            new Schedule() { Day = Schedule.DayOfWeek.Friday, Group = result},
-        };
-
-            await  _dbContext.Schedules.AddRangeAsync(schedules);
-            await _dbContext.SaveChangesAsync();
+       
+          await  _dbContext.Schedules.AddAsync(newSchedule);
+           await _dbContext.SaveChangesAsync();
         }
     }
 
