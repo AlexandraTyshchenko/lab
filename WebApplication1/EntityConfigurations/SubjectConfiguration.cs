@@ -11,13 +11,7 @@ namespace WebApplication1.EntityConfigurations
             builder.HasKey(s => s.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(s => s.Name);
-            builder.Property(s => s.Description);
-
-            
-            builder.HasOne(s => s.Teacher)
-                .WithMany()
-                .HasForeignKey(s => s.TeacherId)
-                  .OnDelete(DeleteBehavior.Cascade);
+            builder.Property(s => s.Description); 
         }
     }
 }

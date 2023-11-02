@@ -7,7 +7,6 @@ namespace WebApplication1.entities
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public int? TeacherId { get; set; }
-        public Teacher? Teacher { get; set; }
+        public ICollection<SubjectTeacher> SubjectTeachers { get; set; }
     }
 }

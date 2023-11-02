@@ -12,12 +12,6 @@ namespace WebApplication1.EntityConfigurations
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(t => t.Name);
             builder.Property(t => t.ShortInfo);
-
-
-            builder.HasMany(t => t.Subjects)
-                .WithOne(s => s.Teacher)
-                .HasForeignKey(s => s.TeacherId)
-            .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

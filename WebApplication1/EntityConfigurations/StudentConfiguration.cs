@@ -13,7 +13,6 @@ namespace WebApplication1.EntityConfigurations
             builder.Property(s => s.Name);
             builder.Property(s => s.GroupId);
 
-
             builder.HasOne(s => s.Group)
                 .WithMany(g => g.Students)
                 .HasForeignKey(s => s.GroupId)

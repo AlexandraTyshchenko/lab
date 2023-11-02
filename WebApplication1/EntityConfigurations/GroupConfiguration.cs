@@ -15,13 +15,6 @@ namespace WebApplication1.EntityConfigurations
             builder.Property(g => g.Course);
             builder.Property(g => g.Curator);
 
-            builder.HasMany(g => g.Students)
-            .WithOne(s => s.Group)
-             .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(g => g.Schedules)
-                .WithOne(s => s.Group)
-                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

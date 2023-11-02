@@ -14,20 +14,15 @@ namespace WebApplication1.EntityConfigurations
             builder.Property(s => s.NumberInOrder);
             builder.Property(s => s.Classroom);
 
-            builder.HasOne(s => s.Subject)
-                .WithMany()
+            builder.HasOne(s => s.SubjectTeacher)
+                .WithMany(y => y.Schedules)
                 .HasForeignKey(s => s.Id)
-                .OnDelete(DeleteBehavior.SetNull);
-
-            builder.HasOne(s => s.Teacher)
-                .WithMany()
-                .HasForeignKey(s => s.Id)
-                 .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.Group)
-                .WithMany()
+                .WithMany(y => y.Schedules)
                 .HasForeignKey(s => s.Id)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

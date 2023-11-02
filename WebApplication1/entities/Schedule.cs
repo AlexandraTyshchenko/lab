@@ -15,12 +15,10 @@ namespace WebApplication1.entities
         public DayOfWeek Day { get; set; }
         public int? NumberInOrder { get; set; }
         public string Classroom { get; set; }
-        public int? SubjectId { get; set; }
-        public Subject? Subject { get; set; }
-        public int? TeacherId { get; set; }
-        public Teacher? Teacher { get; set; }
+        public int? SubjectTeacherId { get; set; }
+        public SubjectTeacher SubjectTeacher { get; set; }
         public int? GroupId { get; set; }
-        public Group? Group { get; set; }
+        public Group Group { get; set; }
     }
 
 }

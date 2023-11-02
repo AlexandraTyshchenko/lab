@@ -23,6 +23,7 @@ namespace WebApplication1.dbContext
             modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
             modelBuilder.ApplyConfiguration(new SubjectConfiguration());
             modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+            modelBuilder.ApplyConfiguration(new SubjectTeacherConfiguration());
         }
     }
 }
