@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DTOs;
+using WebApplication1.entities.enums;
 using WebApplication1.Interfaces;
 
 namespace WebApplication1.Controllers
@@ -16,11 +18,11 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateSchedule(string groupName)
+        public async Task<IActionResult> CreateSchedule(List<Lesson> lessons, [FromQuery] Day Day, [FromQuery] int groupId)
         {
-             await _scheduleCreator.CreateScheduleAsync(groupName);
-             return Ok();
-
+            await _scheduleCreator.CreateScheduleAsync(lessons, Day, groupId);
+            return Ok();
         }
+
     }
 }
