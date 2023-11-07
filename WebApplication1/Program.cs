@@ -23,8 +23,13 @@ builder.Services.AddScoped<IGroupCreator, GroupCreator>();
 var mapperConfig = new MapperConfig(builder.Services.BuildServiceProvider().GetService<Context>());
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile(mapperConfig));
 builder.Services.AddScoped<IGroupGetter, GroupGetter>();
-
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var app = builder.Build();
+app.UseCors(options => options
+      .AllowAnyHeader()
+      .AllowAnyMethod()
+      .WithOrigins(builder.Configuration.GetSection("Urls:FrontEndUrl").Value)
+      .AllowCredentials());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
