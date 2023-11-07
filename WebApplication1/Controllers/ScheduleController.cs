@@ -10,7 +10,7 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ScheduleController : ControllerBase
     {
-        private IScheduleCreator _scheduleCreator;
+        private readonly IScheduleCreator _scheduleCreator;
 
         public ScheduleController(IScheduleCreator scheduleCreator)
         {

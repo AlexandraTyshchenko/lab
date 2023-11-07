@@ -30,6 +30,7 @@ namespace WebApplication1.Mapper
                         }
                     }
                 });
+            CreateMap<Group, GroupModel>();
         }
     }
 }

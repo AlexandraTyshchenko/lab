@@ -12,7 +12,7 @@ namespace WebApplication1.Services
 {
     public class ScheduleCreator : IScheduleCreator
     {
-        private readonly Context _dbContext; 
+        private Context _dbContext;
         private readonly IMapper _mapper; 
 
         public ScheduleCreator(Context dbContext, IMapper mapper)
@@ -25,7 +25,7 @@ namespace WebApplication1.Services
         {
             var group = await _dbContext.Groups.FindAsync(groupId); 
             if(group == null) {
-                throw new NotFoundException();
+                throw new NotFoundException("group not found");
             }
             var targetLessons = _mapper.Map<List<Schedule>>(lessons)
              .Select(schedule =>//додаємо параметри до кожної лекції дня тижня

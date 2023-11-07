@@ -22,6 +22,7 @@ builder.Services.AddScoped<IGroupCreator, GroupCreator>();
 // Создайте экземпляр MapperConfig и зарегистрируйте его в AutoMapper
 var mapperConfig = new MapperConfig(builder.Services.BuildServiceProvider().GetService<Context>());
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile(mapperConfig));
+builder.Services.AddScoped<IGroupGetter, GroupGetter>();
 
 var app = builder.Build();
 
