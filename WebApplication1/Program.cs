@@ -23,7 +23,6 @@ builder.Services.AddScoped<IGroupCreator, GroupCreator>();
 var mapperConfig = new MapperConfig(builder.Services.BuildServiceProvider().GetService<Context>());
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile(mapperConfig));
 builder.Services.AddScoped<IGroupGetter, GroupGetter>();
-var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var app = builder.Build();
 app.UseCors(options => options
       .AllowAnyHeader()
