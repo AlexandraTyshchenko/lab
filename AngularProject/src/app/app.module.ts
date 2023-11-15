@@ -11,6 +11,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
+import { HttpClientModule }   from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

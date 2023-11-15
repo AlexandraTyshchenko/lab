@@ -10,7 +10,7 @@ function GroupPage() {
     try {
       const response = await GroupService.getAll(); // Call getAll from GroupService
       setGroups(response);
-      console.log(groups);
+      console.log(response );
     } catch (error) {
       setError(error.message);
     }

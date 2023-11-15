@@ -25,10 +25,10 @@ builder.Services.AddAutoMapper(cfg => cfg.AddProfile(mapperConfig));
 builder.Services.AddScoped<IGroupGetter, GroupGetter>();
 var app = builder.Build();
 app.UseCors(options => options
-      .AllowAnyHeader()
-      .AllowAnyMethod()
-      .WithOrigins(builder.Configuration.GetSection("Urls:FrontEndUrl").Value)
-      .AllowCredentials());
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithOrigins("http://localhost:4200") // <-- Set your Angular app's origin
+    .AllowCredentials());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
