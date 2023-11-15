@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 @Component({
   selector: 'app-drop-down-list',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./drop-down-list.component.scss']
 })
 export class DropDownListComponent {
-
+  @Input() items:any = [
+  ];
+  @Input() currentItem:string="";
+  selectItem(name:string){
+    this.currentItem=name;
+  }
 }
