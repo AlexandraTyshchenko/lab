@@ -14,7 +14,7 @@ import { DropDownListComponent } from './components/drop-down-list/drop-down-lis
 import { HttpClientModule }   from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatTableModule } from '@angular/material/table';
-import { PaginatorComponent } from './paginator/paginator.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +25,6 @@ import { PaginatorComponent } from './paginator/paginator.component';
     ScheduleComponent,
     DropDownListComponent,
     PaginatorComponent
-
   ],
   imports: [
     BrowserModule,

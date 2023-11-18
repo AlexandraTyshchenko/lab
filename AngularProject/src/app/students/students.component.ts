@@ -1,31 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BasicItem } from '../basic-item';
+import { Student } from '../student';
+import { StudentService } from '../services/StudentService';
+import { GroupService } from '../services/GroupService';
 
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss']
+  styleUrls: ['./students.component.scss'],
+  providers: [StudentService,GroupService], 
 })
 export class StudentsComponent implements OnInit {
+
   groups: BasicItem[] = [];
   currentGroup: string = "select group";
-  length:number=0;//input for dropdownlist component
-  constructor(private http: HttpClient) {}
-  handleChildValue(selectedItem: BasicItem): void {
-    this.http.get(`https://localhost:7292/api/Students?groupId=${selectedItem.id}&page=1&pageSize=10`).subscribe(
+  length:number=0;//input for pagination component
+  students:Student[]=[];
+  selectedItemId:number=0;
+  constructor(private http: HttpClient,
+    private studentService: StudentService,
+    private groupService:GroupService) {}
+
+  handleGroup(selectedItem: BasicItem): void {
+    this.selectedItemId=selectedItem.id;
+    this.loadStudents(1);
+  }
+  private loadStudents(page: number): void {
+    this.studentService.getStudents(this.selectedItemId, page, 10).subscribe(
       (response: any) => {
-        this.length=response.studentsCount;
-        console.log(response.students);
+        this.length = response.studentsCount;
+        this.students = response.students as Student[];
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
-     ); 
+    );
   }
-  
+  handlePageNumber(pageChange:number): void {
+    this.loadStudents(pageChange);
+  }
   ngOnInit() {
-     this.http.get('https://localhost:7292/api/Group').subscribe(
+    this.groupService.GetGroups().subscribe(
       (response: any) => {
         this.groups = response.map((group: any) => ({
           id: group.id,

@@ -1,13 +1,16 @@
 <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <app-drop-down-list (valueChanged)="handleChildValue($event)" [items]="groups" class="dropdown" [currentItem]="currentGroup" >
+        <app-drop-down-list (valueChanged)="handleGroup($event)" [items]="groups" class="dropdown" [currentItem]="currentGroup" >
         </app-drop-down-list>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
-        <app-paginator [length]="length"></app-paginator>
+        <app-paginator (pageChange) ="handlePageNumber($event)" [length]="length"></app-paginator>
+        <div *ngFor="let student of students">
+            {{ student.id }} - {{ student.name }} 
+          </div>
       </div>
     </div>
   </div>
