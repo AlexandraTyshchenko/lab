@@ -10,12 +10,20 @@ import { BasicItem } from '../basic-item';
 export class StudentsComponent implements OnInit {
   groups: BasicItem[] = [];
   currentGroup: string = "select group";
-  groupId:number=0;
-  length:number=0;
+  length:number=0;//input for dropdownlist component
   constructor(private http: HttpClient) {}
   handleChildValue(selectedItem: BasicItem): void {
-    this.groupId = selectedItem.id;
+    this.http.get(`https://localhost:7292/api/Students?groupId=${selectedItem.id}&page=1&pageSize=10`).subscribe(
+      (response: any) => {
+        this.length=response.studentsCount;
+        console.log(response.students);
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+     ); 
   }
+  
   ngOnInit() {
      this.http.get('https://localhost:7292/api/Group').subscribe(
       (response: any) => {
@@ -28,13 +36,6 @@ export class StudentsComponent implements OnInit {
         console.error('Error fetching data:', error);
       }
      ); 
-     this.http.get(`https://localhost:7292/api/Students?groupId=${this.groupId}&page=1&pageSize=10`).subscribe(
-      (response: any) => {
-        this.length=response.studentsCount;
-      },
-      (error) => {
-        console.error('Error fetching data:', error);
-      }
-     ); 
+     
   }
 }
