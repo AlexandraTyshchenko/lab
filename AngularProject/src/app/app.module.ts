@@ -12,7 +12,9 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
 import { HttpClientModule }   from '@angular/common/http';
-
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatTableModule } from '@angular/material/table';
+import { PaginatorComponent } from './paginator/paginator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,12 +24,16 @@ import { HttpClientModule }   from '@angular/common/http';
     SubjectsComponent,
     ScheduleComponent,
     DropDownListComponent,
+    PaginatorComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

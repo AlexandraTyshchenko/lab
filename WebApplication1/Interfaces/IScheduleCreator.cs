@@ -5,6 +5,7 @@ namespace WebApplication1.Interfaces
 {
     public interface IScheduleCreator
     {
+
         public Task CreateScheduleAsync(List<Lesson> lessons, Day Day, int groupId);
     }
 }

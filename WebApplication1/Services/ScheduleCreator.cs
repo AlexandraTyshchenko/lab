@@ -27,6 +27,9 @@ namespace WebApplication1.Services
             if(group == null) {
                 throw new NotFoundException("group not found");
             }
+        //    var existingSchedules = _dbContext.Schedules
+        //.Where(s => s.Day == DayOfWeek && s.GroupId == groupId)
+        //.ToList(); todo
             var targetLessons = _mapper.Map<List<Schedule>>(lessons)
              .Select(schedule =>//додаємо параметри до кожної лекції дня тижня
                {
