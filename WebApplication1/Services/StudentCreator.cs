@@ -19,7 +19,7 @@ namespace WebApplication1.Services
             var group = _context.Find<Group>(groupId);
             if (group == null)
             {
-                throw new BadRequestException("group not found");
+                throw new NotFoundException("group not found");
             }
             var student = new Student()
             {

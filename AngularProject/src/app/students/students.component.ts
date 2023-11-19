@@ -11,7 +11,7 @@ import { Group } from '../classes/group';
   styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent implements OnInit {
-
+  displayedColumns: string[] = ['lastname', 'firstname', 'email'];
   groups: Group[] = [];
   currentGroup: string = "select group";
   length=0;//input for pagination component
@@ -23,7 +23,6 @@ export class StudentsComponent implements OnInit {
     private groupService:GroupService,
     public dialog:MatDialog
     ) {}
-
   handleGroup(selectedItem: Group): void {
     this.selectedItemId=selectedItem.id;
     this.loadStudents(1);

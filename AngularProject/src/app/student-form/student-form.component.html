@@ -1,20 +1,19 @@
-<form (ngSubmit)="onSubmit()">
-<div class="example-container">
+ <form  (ngSubmit)="onSubmit()"> 
+    <div class="example-container">
     <mat-form-field>
-      <input matInput placeholder="Input">
-    </mat-form-field>
-  
-    <mat-form-field>
-        <input matInput placeholder="Input">
+        <input matInput placeholder="First name" [(ngModel)]="firstName" name="firstName">
       </mat-form-field>
-    
+      
       <mat-form-field>
-        <input matInput placeholder="Input">
+        <input matInput placeholder="Last name" [(ngModel)]="lastName" name="lastName">
       </mat-form-field>
-
+      
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="email" name="email">
+      </mat-form-field>
       <app-drop-down-list (valueChanged)="handleGroup($event)"  [currentItem]="currentGroup"  [items]="groups" class="dropdown" >
     </app-drop-down-list>
     <button mat-button type="submit">Submit Form</button>
   </div>
-  </form>
-  <button mat-button (click)="closeForm()">Close Form</button>
+ </form> 
+<button mat-button (click)="closeForm()">Close Form</button>

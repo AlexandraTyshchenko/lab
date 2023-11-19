@@ -36,7 +36,7 @@ namespace WebApplication1.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
+        [HttpPost("AddStudents")]
         public async Task<IActionResult> AddStudents(
          [FromForm,Required] string firstName, [FromForm, Required] string lastName, [FromForm, Required] int groupId, [FromForm, Required] string email)
         {

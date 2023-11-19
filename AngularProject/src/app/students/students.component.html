@@ -8,9 +8,30 @@
     <div class="row">
       <div class="col-md-12">
         <app-paginator (pageChange) ="handlePageNumber($event)" [length]="length"></app-paginator>
-        <div *ngFor="let student of students">
-            {{ student.id }} - {{ student.name }} {{student.lastName}} {{student.email}}
-         </div>
+        <table mat-table [dataSource]="students" class="mat-elevation-z8">
+
+
+          <ng-container matColumnDef="lastname">
+            <th mat-header-cell *matHeaderCellDef> last name </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+          </ng-container>
+        
+        
+          <ng-container matColumnDef="firstname">
+            <th mat-header-cell *matHeaderCellDef> first name</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+        
+      
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+        
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
          <button class="btn btn-success" (click)="createForm()" >add student</button>
 
       </div>
