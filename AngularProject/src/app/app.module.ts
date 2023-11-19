@@ -15,6 +15,8 @@ import { HttpClientModule }   from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatTableModule } from '@angular/material/table';
 import { PaginatorComponent } from './components/paginator/paginator.component';
+import { TestComponent } from './test/test.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,8 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     SubjectsComponent,
     ScheduleComponent,
     DropDownListComponent,
-    PaginatorComponent
+    PaginatorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { PaginatorComponent } from './components/paginator/paginator.component';
     HttpClientModule,
     MatPaginatorModule,
     MatTableModule,
+    TestComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

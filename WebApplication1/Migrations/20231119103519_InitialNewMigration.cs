@@ -5,7 +5,7 @@
 namespace WebApplication1.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialC : Migration
+    public partial class InitialNewMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,7 +60,9 @@ namespace WebApplication1.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: true)
+                    GroupId = table.Column<int>(type: "int", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,7 +76,7 @@ namespace WebApplication1.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubjectTeacher",
+                name: "SubjectTeachers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -84,16 +86,16 @@ namespace WebApplication1.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SubjectTeacher", x => x.Id);
+                    table.PrimaryKey("PK_SubjectTeachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SubjectTeacher_Subjects_SubjectId",
+                        name: "FK_SubjectTeachers_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
-                        name: "FK_SubjectTeacher_Teachers_SubjectId",
-                        column: x => x.SubjectId,
+                        name: "FK_SubjectTeachers_Teachers_TeacherId",
+                        column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
@@ -121,9 +123,9 @@ namespace WebApplication1.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
-                        name: "FK_Schedules_SubjectTeacher_SubjectTeacherId",
+                        name: "FK_Schedules_SubjectTeachers_SubjectTeacherId",
                         column: x => x.SubjectTeacherId,
-                        principalTable: "SubjectTeacher",
+                        principalTable: "SubjectTeachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                 });
@@ -144,9 +146,14 @@ namespace WebApplication1.Migrations
                 column: "GroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubjectTeacher_SubjectId",
-                table: "SubjectTeacher",
+                name: "IX_SubjectTeachers_SubjectId",
+                table: "SubjectTeachers",
                 column: "SubjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SubjectTeachers_TeacherId",
+                table: "SubjectTeachers",
+                column: "TeacherId");
         }
 
         /// <inheritdoc />
@@ -159,7 +166,7 @@ namespace WebApplication1.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "SubjectTeacher");
+                name: "SubjectTeachers");
 
             migrationBuilder.DropTable(
                 name: "Groups");

@@ -88,8 +88,14 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("GroupId")
                         .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -143,7 +149,9 @@ namespace WebApplication1.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("SubjectTeacher");
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("SubjectTeachers");
                 });
 
             modelBuilder.Entity("WebApplication1.entities.Teacher", b =>
@@ -206,7 +214,7 @@ namespace WebApplication1.Migrations
 
                     b.HasOne("WebApplication1.entities.Teacher", "Teacher")
                         .WithMany("Subjects")
-                        .HasForeignKey("SubjectId")
+                        .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.SetNull)
                         .IsRequired();
 

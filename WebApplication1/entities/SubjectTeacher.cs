@@ -6,6 +6,7 @@
         public Subject Subject { get; set; }
         public int? TeacherId { get; set; }
         public Teacher Teacher { get; set;}
-        public ICollection<Schedule> Schedules { get; set; }
+        public ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
+
     }
 }

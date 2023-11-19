@@ -9,15 +9,14 @@ import { GroupService } from '../services/GroupService';
   selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.scss'],
-  providers: [StudentService,GroupService], 
 })
 export class StudentsComponent implements OnInit {
 
   groups: BasicItem[] = [];
   currentGroup: string = "select group";
-  length:number=0;//input for pagination component
+  length=0;//input for pagination component
   students:Student[]=[];
-  selectedItemId:number=0;
+  selectedItemId=0;
   constructor(private http: HttpClient,
     private studentService: StudentService,
     private groupService:GroupService) {}
@@ -27,31 +26,31 @@ export class StudentsComponent implements OnInit {
     this.loadStudents(1);
   }
   private loadStudents(page: number): void {
-    this.studentService.getStudents(this.selectedItemId, page, 10).subscribe(
-      (response: any) => {
+    this.studentService.getStudents(this.selectedItemId, page, 10).subscribe({
+      next: (response: any) => {
         this.length = response.studentsCount;
-        this.students = response.students as Student[];
+        this.students = response.students;
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching data:', error);
       }
-    );
+    });
   }
+  
   handlePageNumber(pageChange:number): void {
     this.loadStudents(pageChange);
   }
   ngOnInit() {
-    this.groupService.GetGroups().subscribe(
-      (response: any) => {
+    this.groupService.GetGroups().subscribe({
+      next: (response: any) => {
         this.groups = response.map((group: any) => ({
           id: group.id,
           itemName: group.name
-        }));          
+        }));
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching data:', error);
       }
-     ); 
-     
+    });
   }
-}
+}  

@@ -17,7 +17,7 @@ namespace WebApplication1.EntityConfigurations
                .OnDelete(DeleteBehavior.SetNull);
             builder.HasOne(s => s.Teacher)
              .WithMany(g => g.Subjects)
-             .HasForeignKey(s => s.SubjectId)
+             .HasForeignKey(s => s.TeacherId)
              .OnDelete(DeleteBehavior.SetNull);
         }
     }
