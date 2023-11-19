@@ -7,13 +7,13 @@ import { Component } from '@angular/core';
 })
 export class  SideBarComponent {
   toggle: boolean= false;
-  activeButton:string ="btn2";
+  activeButton:string ="btn1";
   changeToggle() {
     this.toggle = !this.toggle;
   }
   setActive (buttonName:string){
     this.activeButton = buttonName;
-    this.toggle=false;//ховаємо навбар
+    this.toggle=false;
   }
   isActive(buttonName:string){
     return this.activeButton === buttonName;

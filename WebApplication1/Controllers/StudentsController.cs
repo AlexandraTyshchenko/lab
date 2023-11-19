@@ -13,10 +13,12 @@ namespace WebApplication1.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly IStudentsGetter _studentsGetter;
+        private readonly IStudentCreator _studentsCreator;
 
-        public StudentsController( IStudentsGetter studentsGetter)
+        public StudentsController( IStudentsGetter studentsGetter,IStudentCreator  studentCreator)
         {
             _studentsGetter= studentsGetter;
+            _studentsCreator= studentCreator;
         }
 
         [HttpGet]
@@ -32,6 +34,15 @@ namespace WebApplication1.Controllers
                 StudentsCount = _studentsGetter.StudentsCount
             };
             return Ok(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStudents(
+         [FromForm,Required] string firstName, [FromForm, Required] string lastName, [FromForm, Required] int groupId, [FromForm, Required] string email)
+        {
+            await _studentsCreator.AddStudent(firstName, lastName, groupId, email);
+
+            return Ok();
         }
 
     }

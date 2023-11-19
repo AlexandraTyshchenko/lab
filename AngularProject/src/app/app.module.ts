@@ -16,6 +16,10 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatTableModule } from '@angular/material/table';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { TestComponent } from './test/test.component';
+import { StudentFormComponent } from './student-form/student-form.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,7 @@ import { TestComponent } from './test/test.component';
     ScheduleComponent,
     DropDownListComponent,
     PaginatorComponent,
-
+    StudentFormComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,10 @@ import { TestComponent } from './test/test.component';
     HttpClientModule,
     MatPaginatorModule,
     MatTableModule,
-    TestComponent
+    TestComponent,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

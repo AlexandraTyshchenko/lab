@@ -1,5 +1,5 @@
 import { Component,EventEmitter,Input,Output } from '@angular/core';
-import { BasicItem } from 'src/app/basic-item';
+import { BasicItem } from 'src/app/interfaces/basic-item';
 @Component({
   selector: 'app-drop-down-list',
   templateUrl: './drop-down-list.component.html',
@@ -10,7 +10,7 @@ export class DropDownListComponent {
   @Input() currentItem:string="";
   @Output() valueChanged: EventEmitter<BasicItem> = new EventEmitter<BasicItem>();
   selectItem(item:BasicItem){
-    this.currentItem=item.itemName;
+    this.currentItem=item.name;
     this.valueChanged.emit(item);
   }
 }

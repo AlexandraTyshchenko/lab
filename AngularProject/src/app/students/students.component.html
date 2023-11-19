@@ -9,8 +9,10 @@
       <div class="col-md-12">
         <app-paginator (pageChange) ="handlePageNumber($event)" [length]="length"></app-paginator>
         <div *ngFor="let student of students">
-            {{ student.id }} - {{ student.name }} 
-          </div>
+            {{ student.id }} - {{ student.name }} {{student.lastName}} {{student.email}}
+         </div>
+         <button class="btn btn-success" (click)="createForm()" >add student</button>
+
       </div>
     </div>
   </div>

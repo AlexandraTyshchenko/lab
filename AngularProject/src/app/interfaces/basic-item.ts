@@ -1,5 +1,5 @@
 export interface BasicItem {
      id:number,
-    itemName:string
+     name:string
  
 }
