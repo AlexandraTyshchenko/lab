@@ -3,11 +3,11 @@ import {CommonModule} from '@angular/common'
 @Component({
   standalone:true,
   selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss'],
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
   imports: [CommonModule],
 })
 
-export class TestComponent {
+export class HomeComponent {
 
 }

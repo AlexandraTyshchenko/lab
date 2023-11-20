@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
-import { Student } from "../classes/student";
+import { Student } from "../interfaces/student";
 import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
 import { API_BASE_URL } from "src/config";

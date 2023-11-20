@@ -10,7 +10,7 @@ export class AppComponent {
     this.opened = !this.opened;
     console.log(this.opened );
   }
-  activeButton:string ="btn1";
+  activeButton:string ="";
   
   setActive (buttonName:string){
     this.activeButton = buttonName;

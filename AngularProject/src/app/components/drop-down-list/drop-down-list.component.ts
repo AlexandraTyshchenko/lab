@@ -1,6 +1,5 @@
 import { Component,EventEmitter,Input,Output } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
-import { BasicItem } from 'src/app/interfaces/basic-item';
 @Component({
   selector: 'app-drop-down-list',
   templateUrl: './drop-down-list.component.html',

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../classes/student';
+import { Student } from '../interfaces/student';
 import { StudentService } from '../services/StudentService';
 import { GroupService } from '../services/GroupService';
 import { StudentFormComponent } from '../student-form/student-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Group } from '../classes/group';
+import { Group } from '../interfaces/group';
+
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
@@ -17,9 +18,8 @@ export class StudentsComponent implements OnInit {
   length=0;//input for pagination component
   students:Student[]=[];
   selectedGroupId=-1;
-  group = new Group();
   curator="";
-  lastPage=0;
+  page=0;
   constructor(
     private studentService: StudentService,
     private groupService:GroupService,
@@ -47,7 +47,7 @@ export class StudentsComponent implements OnInit {
         this.length = response.studentsCount;
         console.log( response.studentsCount);
         this.students = response.students;
-        this.lastPage = Math.ceil(response.studentsCount / 10);
+        this.page=page;
       },
       error: (error) => {
         console.error('Error fetching data:', error);
@@ -67,8 +67,7 @@ export class StudentsComponent implements OnInit {
     dialogConfig.data = {
       groupId:this.selectedGroupId,
       onConfirmation: () => {
-        this.loadStudents(this.lastPage);
-        this.lastPage = this.lastPage-1
+        this.loadStudents(this.page);
      }
     };
    

@@ -1,48 +1,61 @@
-import { Component, Inject  } from '@angular/core';
-import { GroupService } from '../services/GroupService';
-import { Group } from '../classes/group';
+import { Component, Inject } from '@angular/core';
+import { Group } from '../interfaces/group';
 import { DialogRef } from '@angular/cdk/dialog';
 import { StudentService } from '../services/StudentService';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.scss'],
-
 })
 export class StudentFormComponent {
+  groups: Group[] = [];
+  currentGroup = 'select group';
+  groupId = -1;
+  
+  studentForm: FormGroup;
 
-  groups:Group[]=[];
-  currentGroup="select group";
-  groupId=-1;
-  firstName="";  
-  lastName= "";
-  email = "";
-  done = false;
-  handleGroup(selectedGroup:Group){
-      this.groupId=selectedGroup.id;
+  handleGroup(selectedGroup: Group) {
+    this.groupId = selectedGroup.id;
   }
+
   closeForm() {
     this.dialogRef.close();
   }
-  onSubmit(){
-      if(this.groupId!=-1){
-         this.studentService.addStudent(this.firstName,this.lastName, this.groupId, this.email).subscribe({
-          next:() => { this.done=true;console.log(this.done);this.closeForm(); this.data.onConfirmation();},
-          error: error => console.log(error)
+
+  onSubmit() {
+    // Check if the form is valid before submitting
+    if (this.studentForm.valid) {
+      const { firstName, lastName, email } = this.studentForm.value;
+      this.studentService.addStudent(firstName, lastName, this.groupId, email).subscribe({
+        next: () => {
+          this.closeForm();
+          this.data.onConfirmation(); 
+        },
+        error: (error) => console.log(error),
       });
-      }     
-  }
-  constructor(private groupService:GroupService,
-    private dialogRef:DialogRef,
-    private studentService:StudentService,
-    private router: Router,
-    @Inject(MAT_DIALOG_DATA) private data: any
-    ) {
-        this.groupId=data.groupId
-      }
- 
+    } else {
+      console.log('Form is not valid. Please check the fields.');
+    }
   }
 
+  constructor(
+    private dialogRef: DialogRef,
+    private studentService: StudentService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private fb: FormBuilder
+  ) {
+    this.groupId = data.groupId;
+
+
+    this.studentForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
+}

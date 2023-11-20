@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { API_BASE_URL } from "src/config";
-import { Group } from "../classes/group";
+import { Group } from "../interfaces/group";
 
 @Injectable({
   providedIn: 'root',
