@@ -1,2 +1,29 @@
-<app-side-bar></app-side-bar>
-<router-outlet></router-outlet>
+
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="opened" mode="push">
+    <mat-label class="centered-label"><h1>Menu</h1></mat-label>
+        <mat-list role="list">
+            <mat-list-item role="listitem"> <a routerLink="/students"  class="nav-link " [ngClass]="{'activeLink': isActive('btn1')}" (click)="setActive('btn1')" aria-current="page">
+                List of students
+              </a>    </mat-list-item>
+            <mat-list-item role="listitem"><a routerLink="/subjects" class="nav-link " [ngClass]="{'activeLink ': isActive('btn2')} " (click)="setActive('btn2')">
+                List of  subjects
+              </a></mat-list-item>
+            <mat-list-item role="listitem"><a routerLink="/schedule" class="nav-link " [ngClass]="{'activeLink ': isActive('btn3')}" (click)="setActive('btn3')" >
+                Schedule
+              </a></mat-list-item>
+          </mat-list>             
+    </mat-sidenav>
+    <mat-sidenav-content>     
+        <p>
+            <mat-toolbar>
+              <button (click)="toggleSidenav()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                <mat-icon>menu</mat-icon>
+              </button>
+              <span>Schedule</span>
+              <span class="example-spacer"></span>
+            </mat-toolbar>
+          </p>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container> 

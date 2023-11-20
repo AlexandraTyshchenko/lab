@@ -14,5 +14,6 @@ export class PaginatorComponent {
     }
     pageSize=10;
     @Input() length:number=10;
+    @Input() currentPageIndex=0;
 
 }

@@ -14,11 +14,13 @@ namespace WebApplication1.Controllers
     {
         private readonly IStudentsGetter _studentsGetter;
         private readonly IStudentCreator _studentsCreator;
-
-        public StudentsController( IStudentsGetter studentsGetter,IStudentCreator  studentCreator)
+        private readonly IStudentDeletter _studentDeletter;
+        public StudentsController( IStudentsGetter studentsGetter,IStudentCreator  studentCreator, IStudentDeletter studentDeletter)
         {
             _studentsGetter= studentsGetter;
             _studentsCreator= studentCreator;
+            _studentDeletter= studentDeletter;
+
         }
 
         [HttpGet]
@@ -42,6 +44,13 @@ namespace WebApplication1.Controllers
         {
             await _studentsCreator.AddStudent(firstName, lastName, groupId, email);
 
+            return Ok();
+        }
+
+        [HttpDelete("DeleteStudent")]
+        public async Task<IActionResult> DeleteStudent(int id)
+        {
+            await _studentDeletter.DeleteStudent(id);
             return Ok();
         }
 

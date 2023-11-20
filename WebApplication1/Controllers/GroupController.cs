@@ -19,6 +19,7 @@ namespace WebApplication1.Controllers
             _groupCreator = groupCreator;
             _groupGetter = groupGetter;
             _mapper = mapper;
+
         }
 
         [HttpPost]
@@ -35,5 +36,7 @@ namespace WebApplication1.Controllers
             var groups = _mapper.Map<List<GroupModel>>(result);
             return Ok(groups);
         }
+
+       
     }
 }

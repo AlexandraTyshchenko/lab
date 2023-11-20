@@ -25,4 +25,10 @@ export class StudentService {
   return this.http.post(`${API_BASE_URL}/api/Students/AddStudents`, formData);
       
   }
+
+  deleteStudent(id:number){
+    console.log(id);
+    return this.http.delete(`${API_BASE_URL}/api/Students/DeleteStudent?id=${id}`);
+
+  }
 }

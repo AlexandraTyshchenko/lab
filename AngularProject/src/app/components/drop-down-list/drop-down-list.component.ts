@@ -1,4 +1,5 @@
 import { Component,EventEmitter,Input,Output } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
 import { BasicItem } from 'src/app/interfaces/basic-item';
 @Component({
   selector: 'app-drop-down-list',
@@ -6,11 +7,14 @@ import { BasicItem } from 'src/app/interfaces/basic-item';
   styleUrls: ['./drop-down-list.component.scss']
 })
 export class DropDownListComponent {
-  @Input() items: BasicItem[] = [];
+  @Input() items: any[] = [];
   @Input() currentItem:string="";
-  @Output() valueChanged: EventEmitter<BasicItem> = new EventEmitter<BasicItem>();
-  selectItem(item:BasicItem){
-    this.currentItem=item.name;
+  @Output() valueChanged: EventEmitter<any> = new EventEmitter<any>();
+  onSelectionChange(event: MatSelectChange): void {
+    const selectedValue = event.value;
+    this.selectItem(selectedValue);
+  }
+  selectItem(item: any): void {
     this.valueChanged.emit(item);
   }
 }

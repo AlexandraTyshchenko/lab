@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject  } from '@angular/core';
 import { GroupService } from '../services/GroupService';
 import { Group } from '../classes/group';
 import { DialogRef } from '@angular/cdk/dialog';
 import { StudentService } from '../services/StudentService';
+import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-student-form',
@@ -11,14 +13,14 @@ import { StudentService } from '../services/StudentService';
 
 })
 export class StudentFormComponent {
- 
+
   groups:Group[]=[];
   currentGroup="select group";
   groupId=-1;
   firstName="";  
   lastName= "";
   email = "";
-  done: boolean = false;
+  done = false;
   handleGroup(selectedGroup:Group){
       this.groupId=selectedGroup.id;
   }
@@ -28,23 +30,19 @@ export class StudentFormComponent {
   onSubmit(){
       if(this.groupId!=-1){
          this.studentService.addStudent(this.firstName,this.lastName, this.groupId, this.email).subscribe({
-          next:() => { this.done=true;console.log(this.done);this.closeForm()},
+          next:() => { this.done=true;console.log(this.done);this.closeForm(); this.data.onConfirmation();},
           error: error => console.log(error)
       });
       }     
   }
   constructor(private groupService:GroupService,
     private dialogRef:DialogRef,
-    private studentService:StudentService
-    ) {  }
-  ngOnInit() {
-    this.groupService.GetGroups().subscribe({
-      next: (response: any) => {
-       this.groups=response;
-      },
-      error: (error) => {
-        console.error('Error fetching data:', error);
+    private studentService:StudentService,
+    private router: Router,
+    @Inject(MAT_DIALOG_DATA) private data: any
+    ) {
+        this.groupId=data.groupId
       }
-    });
+ 
   }
-}
+

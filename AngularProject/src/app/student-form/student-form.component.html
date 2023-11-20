@@ -11,9 +11,7 @@
       <mat-form-field>
         <input matInput placeholder="Email" [(ngModel)]="email" name="email">
       </mat-form-field>
-      <app-drop-down-list (valueChanged)="handleGroup($event)"  [currentItem]="currentGroup"  [items]="groups" class="dropdown" >
-    </app-drop-down-list>
-    <button mat-button type="submit">Submit Form</button>
+    <button mat-button type="submit">Complete</button>
   </div>
  </form> 
-<button mat-button (click)="closeForm()">Close Form</button>
+<button mat-button (click)="closeForm()">Close</button>

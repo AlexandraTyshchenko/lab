@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { StudentsComponent } from './students/students.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { SubjectsComponent } from './subjects/subjects.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
-   {path: "", component:AppComponent},
+   {path: "", component:TestComponent},
    {path: 'students', component: StudentsComponent},
    {path:'schedule',component:ScheduleComponent},
    {path:'subjects', component:SubjectsComponent},

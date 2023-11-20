@@ -11,28 +11,43 @@ import { Group } from '../classes/group';
   styleUrls: ['./students.component.scss'],
 })
 export class StudentsComponent implements OnInit {
-  displayedColumns: string[] = ['lastname', 'firstname', 'email'];
+  displayedColumns: string[] = ['lastname', 'firstname', 'email','id'];
   groups: Group[] = [];
   currentGroup: string = "select group";
   length=0;//input for pagination component
   students:Student[]=[];
-  selectedItemId=0;
-
+  selectedGroupId=-1;
+  group = new Group();
+  curator="";
+  lastPage=0;
   constructor(
     private studentService: StudentService,
     private groupService:GroupService,
     public dialog:MatDialog
     ) {}
   handleGroup(selectedItem: Group): void {
-    this.selectedItemId=selectedItem.id;
+    this.selectedGroupId=selectedItem.id;
+    this.curator = selectedItem.curator;
     this.loadStudents(1);
   }
 
+  deleteStudent(id: number) {
+    if(confirm("Are you sure to delete ")) {
+      this.studentService.deleteStudent(id).subscribe(() => {
+        console.log("success");
+        this.loadStudents(1);
+      });
+    }
+   
+  }
+  
   private loadStudents(page: number): void {
-    this.studentService.getStudents(this.selectedItemId, page, 10).subscribe({
+    this.studentService.getStudents(this.selectedGroupId, page, 10).subscribe({
       next: (response: any) => {
         this.length = response.studentsCount;
+        console.log( response.studentsCount);
         this.students = response.students;
+        this.lastPage = Math.ceil(response.studentsCount / 10);
       },
       error: (error) => {
         console.error('Error fetching data:', error);
@@ -49,6 +64,14 @@ export class StudentsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
+    dialogConfig.data = {
+      groupId:this.selectedGroupId,
+      onConfirmation: () => {
+        this.loadStudents(this.lastPage);
+        this.lastPage = this.lastPage-1
+     }
+    };
+   
     this.dialog.open(StudentFormComponent,dialogConfig);
   }
 

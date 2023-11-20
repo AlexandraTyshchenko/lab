@@ -1,10 +1,12 @@
-import { BasicItem } from "../interfaces/basic-item";
+export class Group {
+     id: number;
+     name: string;
+    curator:string;
+    constructor(id?: number, name?: string,curator?:string) {
+        this.id = id || 0;
+        this.name = name || '';
+        this.curator=curator||'';
 
-export class Group implements BasicItem{
-    id: number;
-    name: string;
-    constructor(id: number, name: string) {
-        this.id = id;
-        this.name = name;
     }
+  
 }

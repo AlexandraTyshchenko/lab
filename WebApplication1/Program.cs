@@ -25,6 +25,7 @@ builder.Services.AddAutoMapper(cfg => cfg.AddProfile(mapperConfig));
 builder.Services.AddScoped<IGroupGetter, GroupGetter>();
 builder.Services.AddScoped<IStudentsGetter, StudentsGetter>();
 builder.Services.AddScoped<IStudentCreator, StudentCreator>();
+builder.Services.AddScoped<IStudentDeletter,StudentDeletter>();
 var app = builder.Build();
 app.UseCors(options => options
     .AllowAnyHeader()
