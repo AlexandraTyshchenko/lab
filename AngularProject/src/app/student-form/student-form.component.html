@@ -1,4 +1,6 @@
+
 <form (ngSubmit)="onSubmit()" [formGroup]="studentForm">
+  <h3>{{errorMessage}}</h3>
   <div class="form-container form">
     <mat-form-field class="form-field">
       <input matInput placeholder="First name" formControlName="firstName">

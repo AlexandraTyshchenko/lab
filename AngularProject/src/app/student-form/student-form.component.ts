@@ -1,8 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import {  ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { Group } from '../interfaces/group';
 import { DialogRef } from '@angular/cdk/dialog';
 import { StudentService } from '../services/StudentService';
-import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -11,11 +10,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './student-form.component.html',
   styleUrls: ['./student-form.component.scss'],
 })
-export class StudentFormComponent {
+export class StudentFormComponent  {
   groups: Group[] = [];
   currentGroup = 'select group';
   groupId = -1;
-  
+  errorMessage=" ";
   studentForm: FormGroup;
 
   handleGroup(selectedGroup: Group) {
@@ -34,24 +33,26 @@ export class StudentFormComponent {
         next: () => {
           this.closeForm();
           this.data.onConfirmation(); 
+          this.errorMessage="";
         },
-        error: (error) => console.log(error),
+        error: (error) => {
+          
+          console.log(error);
+          this.errorMessage=error;
+
+        },
       });
     } else {
-      console.log('Form is not valid. Please check the fields.');
+      this.errorMessage = "Form is not valid. Please check the fields.";
     }
   }
-
   constructor(
     private dialogRef: DialogRef,
     private studentService: StudentService,
-    private router: Router,
     @Inject(MAT_DIALOG_DATA) private data: any,
     private fb: FormBuilder
   ) {
     this.groupId = data.groupId;
-
-
     this.studentForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
