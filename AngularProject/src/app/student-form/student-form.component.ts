@@ -1,4 +1,4 @@
-import {  ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Group } from '../interfaces/group';
 import { DialogRef } from '@angular/cdk/dialog';
 import { StudentService } from '../services/StudentService';

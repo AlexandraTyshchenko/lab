@@ -13,10 +13,10 @@ namespace WebApplication1.Services
         public StudentsGetter(Context dbContext)
         {
             _dbContext= dbContext;
-            StudentsCount = _dbContext.Students.Count();
+          
         }
 
-        public int StudentsCount { get;}
+        public int StudentsCount { get;set;}
 
         public async Task<ICollection<Student>> GetStudentsAsync(int groupId, int page, int pageSize)
         {
@@ -26,7 +26,8 @@ namespace WebApplication1.Services
                 .Where(x => x.GroupId == groupId)
                 .Skip(startIndex)
                 .Take(pageSize)
-                .ToListAsync(); 
+                .ToListAsync();
+            StudentsCount = result.Count();
             return result;
         }
     }

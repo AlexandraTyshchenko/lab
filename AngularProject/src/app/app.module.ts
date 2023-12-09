@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { NotFoundComponent } from './not-found/not-found.component';
 import { StudentsComponent } from './students/students.component';
-import { SubjectsComponent } from './subjects/subjects.component';
+
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DropDownListComponent } from './components/drop-down-list/drop-down-list.component';
@@ -25,6 +25,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import { HomeComponent } from './home/home.component';
+import { GroupFormComponent } from './group-form/group-form.component';
+import { TeachersComponent } from './teachers/teachers.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 
 @NgModule({
@@ -32,11 +35,13 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     NotFoundComponent,
     StudentsComponent,
-    SubjectsComponent,
+    TeachersComponent,
     ScheduleComponent,
     DropDownListComponent,
     PaginatorComponent,
     StudentFormComponent,
+    GroupFormComponent,
+    SubjectsComponent,
 
   ],
   imports: [

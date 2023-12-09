@@ -15,4 +15,12 @@ export class GroupService {
     return this.http.get<Group[]>(`${API_BASE_URL}/api/Group`);
   }
 
+  addGroup(groupName:string, groupCourse:number, groupCurator: string):Observable<any>{
+      const formData = new FormData();
+      formData.append('groupName', groupName);
+      formData.append('groupCourse', groupCourse.toString());
+      formData.append('groupCurator', groupCurator);
+  
+    return this.http.post(`${API_BASE_URL}/api/Group`, formData);
+  }
 }

@@ -5,6 +5,7 @@ import { GroupService } from '../services/GroupService';
 import { StudentFormComponent } from '../student-form/student-form.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Group } from '../interfaces/group';
+import { GroupFormComponent } from '../group-form/group-form.component';
 
 @Component({
   selector: 'app-students',
@@ -12,6 +13,7 @@ import { Group } from '../interfaces/group';
   styleUrls: ['./students.component.scss'],
 
 })
+
 export class StudentsComponent implements OnInit {
   displayedColumns: string[] = ['lastname', 'firstname', 'email','id'];
   groups: Group[] = [];
@@ -46,7 +48,6 @@ export class StudentsComponent implements OnInit {
     this.studentService.getStudents(this.selectedGroupId, page, 10).subscribe({
       next: (response: any) => {
         this.length = response.studentsCount;
-        console.log( response.studentsCount);
         this.students = response.students;
         this.page=page;
       },
@@ -59,7 +60,20 @@ export class StudentsComponent implements OnInit {
   handlePageNumber(pageChange:number): void {
     this.loadStudents(pageChange);
   }
-  
+  createGroupForm(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "60%";
+    dialogConfig.data = {
+      groupId:this.selectedGroupId,
+      onConfirmation: () => {
+        this.loadStudents(this.page);
+     }
+    };
+   
+    this.dialog.open(GroupFormComponent,dialogConfig);
+  }
   createForm(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;

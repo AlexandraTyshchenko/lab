@@ -19,13 +19,17 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddScoped<IScheduleCreator, ScheduleCreator>();
 builder.Services.AddScoped<IGroupCreator, GroupCreator>();
 
-// Создайте экземпляр MapperConfig и зарегистрируйте его в AutoMapper
-var mapperConfig = new MapperConfig(builder.Services.BuildServiceProvider().GetService<Context>());
+
+var mapperConfig = new MapperConfig();
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile(mapperConfig));
 builder.Services.AddScoped<IGroupGetter, GroupGetter>();
 builder.Services.AddScoped<IStudentsGetter, StudentsGetter>();
 builder.Services.AddScoped<IStudentCreator, StudentCreator>();
 builder.Services.AddScoped<IStudentDeletter,StudentDeletter>();
+builder.Services.AddScoped<ITeacherCreator, TeacherCreator>();
+builder.Services.AddScoped<ITeachersGetter, TeacherGetter>();
+builder.Services.AddScoped<ISubjectCreator, SubjectCreator>();
+builder.Services.AddScoped<ISubjectsGetter, SubjectsGetter>();
 var app = builder.Build();
 app.UseCors(options => options
     .AllowAnyHeader()

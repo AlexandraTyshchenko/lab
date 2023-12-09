@@ -1,0 +1,22 @@
+<form  (ngSubmit)="onSubmit()"   >
+    <div class="form-container form">
+        <h3>{{errorMessage}}</h3>
+
+<mat-form-field class="form-field">
+    <input matInput placeholder="group name" [(ngModel)]="groupName" [ngModelOptions]="{standalone: true}">
+</mat-form-field>
+      <mat-form-field>
+        <mat-label> {{ currentCourse}}</mat-label>
+        <mat-select (selectionChange)="onSelectionChange($event)">
+          <mat-option *ngFor="let course of  courses" [value]="course">{{ course }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <app-drop-down-list (valueChanged)="handleTeacher($event)" [items]="teachers"  [currentItem]="currentTeacher"></app-drop-down-list>
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit">Complete</button>
+        <button mat-raised-button type="button" (click)="closeForm()">Close</button>
+      </div>
+    </div>
+  </form>
+  

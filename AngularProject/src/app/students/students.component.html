@@ -1,6 +1,8 @@
 <div class="container">
   <app-drop-down-list (valueChanged)="handleGroup($event)" [items]="groups" class="dropdown" [currentItem]="currentGroup"></app-drop-down-list>
+  <button class="btn btn-primary" (click)="createGroupForm()">addGroup</button>
   <button [disabled]="selectedGroupId === -1" class="btn btn-success" (click)="createForm()">Add Student to Current Group</button>
+
   <h3>Curator: {{curator}}</h3>
 
   <app-paginator (pageChange)="handlePageNumber($event)" [length]="length"></app-paginator>

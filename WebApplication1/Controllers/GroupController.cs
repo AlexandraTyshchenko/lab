@@ -23,7 +23,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateGroup(string groupName, int groupCourse, string groupCurator)
+        public async Task<IActionResult> CreateGroup([FromForm] string groupName, [FromForm] int groupCourse, [FromForm] string groupCurator)
         {
            await _groupCreator.CreateGroup(groupName, groupCourse, groupCurator);
             return Ok();
