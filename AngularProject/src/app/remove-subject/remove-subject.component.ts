@@ -45,6 +45,12 @@ export class RemoveSubjectComponent implements OnInit {
   }
 
   onSubmit(){
-      
+    if(this.teacherId!==undefined && this.subjectId!==undefined){
+      this.subjectTeacherService.deleteSubject(this.teacherId,this.subjectId).subscribe(() => {
+          this.closeForm();
+          this.data.onConfirmation(); 
+      });
+    }
+   
   }
 }

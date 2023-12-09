@@ -21,4 +21,9 @@ export class SubjectTeacherService {
     getTeacherWithSubjects(id:number): Observable<TeacherSubjects> {
         return this.http.get<TeacherSubjects>(`${API_BASE_URL}/api/Teacher/id?id=${id}`);
     }
+
+    deleteSubject(teacherId:number,subjectId:number){
+        return this.http.delete(`${API_BASE_URL}/api/Teachers/teacherSubject?teacherId=${teacherId}&subjectId=${subjectId}`);
+    }
+    
 }
