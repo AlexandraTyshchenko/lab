@@ -1,0 +1,6 @@
+<form (ngSubmit)="onSubmit()" >
+    <h1>Asign subject</h1>
+    <app-drop-down-list (valueChanged)="handleSubject($event)" [items]="subjects"  [currentItem]="currentSubject"></app-drop-down-list>
+    <button mat-raised-button color="primary" type="submit">Complete</button>
+    <button mat-raised-button type="button" (click)="closeForm()">Close</button>
+</form>

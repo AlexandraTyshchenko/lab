@@ -39,7 +39,7 @@ export class GroupFormComponent implements OnInit{
       this.courseNumber=event.value;
   }
   onSubmit(){
-      if(this.currentTeacherName == undefined || this.groupName == undefined || this.courseNumber==undefined){
+      if(this.currentTeacherName === undefined || this.groupName === undefined || this.courseNumber === undefined){
         this.errorMessage = "Not all fields are filled in";
       }
       else{
@@ -54,7 +54,6 @@ export class GroupFormComponent implements OnInit{
           }
         });
       }
-
   }
 
 

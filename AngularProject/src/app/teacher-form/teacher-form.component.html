@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()" >
+    <h3>{{errorMessage}}</h3>
+    <div class="form-container form">
+      <mat-form-field >
+        <input matInput placeholder="Name" [(ngModel)]="name" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+  
+      <mat-form-field >
+        <input matInput placeholder="Short info" [(ngModel)]="shortInfo" [ngModelOptions]="{standalone: true}" >
+      </mat-form-field>
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit">Complete</button>
+        <button mat-raised-button type="button" (click)="closeForm()">Close</button>
+      </div>
+    </div>
+  </form>
+  

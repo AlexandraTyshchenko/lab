@@ -5,5 +5,6 @@ namespace WebApplication1.Interfaces
     public interface ITeachersGetter
     {
         Task<IEnumerable<Teacher>> GetTeachersAsync();
+        Task<Teacher> GetTeacherByID(int id);
     }
 }

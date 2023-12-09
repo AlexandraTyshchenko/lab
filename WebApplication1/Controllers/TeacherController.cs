@@ -12,16 +12,21 @@ namespace WebApplication1.Controllers
         private readonly ITeacherCreator _teacherCreator;
         private readonly ITeachersGetter _teachersGetter;
         private readonly IMapper _mapper;
+        private readonly ISubjectTeacherDeletter _subjectTeacherDeletter;
 
-        public TeacherController(ITeacherCreator teacherCreator, ITeachersGetter teachersGetter, IMapper mapper)
+        public TeacherController(ITeacherCreator teacherCreator, 
+            ITeachersGetter teachersGetter, IMapper mapper,
+            ISubjectTeacherDeletter subjectTeacherDeletter
+            )
         {
             _teacherCreator = teacherCreator;
             _teachersGetter = teachersGetter;
             _mapper = mapper;
+            _subjectTeacherDeletter= subjectTeacherDeletter;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddTeacher(string name,string shortInfo)
+        public async Task<IActionResult> AddTeacher([FromForm] string name, [FromForm] string shortInfo)
         {
             await _teacherCreator.AddTeacher(name, shortInfo);
             return Ok();
@@ -33,6 +38,21 @@ namespace WebApplication1.Controllers
             var result = await _teachersGetter.GetTeachersAsync();
             var teachers = _mapper.Map<List<TeacherModel>>(result);
             return Ok(teachers);
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetTeacherById(int id)
+        {
+            var result = await _teachersGetter.GetTeacherByID(id);
+            var teacher = _mapper.Map<TeacherModelWithSubjectKeys>(result);
+            return Ok(teacher);
+        }
+
+        [HttpDelete("teacherSubject")]
+        public async Task<IActionResult> DeleteSubject(int teacherId, int subjectId)
+        {
+            await _subjectTeacherDeletter.DeleteSubjectAsync(teacherId, subjectId);
+            return Ok();
         }
     }
 }

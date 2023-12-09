@@ -35,11 +35,9 @@ export class StudentFormComponent  {
           this.data.onConfirmation(); 
           this.errorMessage="";
         },
-        error: (error) => {
-          
+        error: (error) => {    
           console.log(error);
           this.errorMessage=error;
-
         },
       });
     } else {
@@ -48,8 +46,8 @@ export class StudentFormComponent  {
   }
   constructor(
     private dialogRef: DialogRef,
-    private studentService: StudentService,
     @Inject(MAT_DIALOG_DATA) private data: any,
+    private studentService: StudentService,
     private fb: FormBuilder
   ) {
     this.groupId = data.groupId;

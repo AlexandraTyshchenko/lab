@@ -1,4 +1,4 @@
-
+<button class="btn btn-primary" (click)="addTeacher()">Add Teacher</button>
 <table mat-table [dataSource]="teachers" class="mat-elevation-z8">
     <ng-container matColumnDef="teacher">
       <th mat-header-cell *matHeaderCellDef>teacher</th>
@@ -6,12 +6,16 @@
     </ng-container>
     <ng-container matColumnDef="shortinfo">
         <th mat-header-cell *matHeaderCellDef>short info</th>
-        <td mat-cell *matCellDef="let element">{{element.shortinfo}}</td>
+        <td mat-cell *matCellDef="let element">{{element.shortInfo}}</td>
       </ng-container>
     <ng-container matColumnDef="subjects">
       <th mat-header-cell *matHeaderCellDef>subjects</th>
-      <td mat-cell *matCellDef="let element">{{element.subjects}}</td>
+      <td mat-cell *matCellDef="let element">{{element.subjects}}
+        <a mat-raised-button matTooltip="asign subject to teacher" (click)="asignSubjectToTeacher(element.id)"> <mat-icon>library_add</mat-icon></a>
+        <a mat-raised-button matTooltip="remove subject" (click)="removeSubject(element.id)"><mat-icon>remove_circle_outline</mat-icon></a>
+      </td>
     </ng-container>
+
 
     
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -30,6 +30,9 @@ builder.Services.AddScoped<ITeacherCreator, TeacherCreator>();
 builder.Services.AddScoped<ITeachersGetter, TeacherGetter>();
 builder.Services.AddScoped<ISubjectCreator, SubjectCreator>();
 builder.Services.AddScoped<ISubjectsGetter, SubjectsGetter>();
+builder.Services.AddScoped<ISubjectDeletter, SubjectDeletter>();
+builder.Services.AddScoped<ISubjectAssignmentToTeacher, SubjectAssignmentToTeacher>();
+builder.Services.AddScoped<ISubjectTeacherDeletter, SubjectTeacherDeletter>();
 var app = builder.Build();
 app.UseCors(options => options
     .AllowAnyHeader()

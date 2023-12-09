@@ -14,23 +14,12 @@ namespace WebApplication1.Mapper
     {
         public MapperConfig()
         {
-
-            //CreateMap<Lesson, Schedule>()
-            //    .BeforeMap((src, dest, context) =>
-            //    {
-            //        if (src.SubjectTeacherId != null)
-            //        {
-            //            var subjectTeacher = _dbContext.SubjectTeachers.FirstOrDefault(st => st.Id == src.SubjectTeacherId);
-            //            if (subjectTeacher != null)
-            //            {
-            //                dest.SubjectTeacher = subjectTeacher;
-            //            }
-            //        }
-            //    });
             CreateMap<Group, GroupModel>();
             CreateMap<Teacher, TeacherModel>()
                  .ForMember(dest => dest.Subjects, opt => opt.MapFrom(src => src.Subjects.Select(st => st.Subject.Name)));
             CreateMap<Subject, SubjectModel>();
+            CreateMap<Teacher, TeacherModelWithSubjectKeys>()
+               .ForMember(dest => dest.Subjects, opt => opt.MapFrom(src => src.Subjects.Select(st => st.Subject)));
         }
     }
 }

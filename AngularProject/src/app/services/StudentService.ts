@@ -27,7 +27,7 @@ export class StudentService {
   }
 
   deleteStudent(id:number){
-    console.log(id);
+
     return this.http.delete(`${API_BASE_URL}/api/Students/DeleteStudent?id=${id}`);
 
   }

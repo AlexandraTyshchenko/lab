@@ -15,6 +15,7 @@ namespace WebApplication1.Services
         {
             _dbContext= dbcontext;
         }
+
         public async Task<IEnumerable<Group>> GetGroupsAsync()
         {
             var result = await _dbContext.Groups.ToListAsync();

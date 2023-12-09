@@ -28,6 +28,11 @@ import { HomeComponent } from './home/home.component';
 import { GroupFormComponent } from './group-form/group-form.component';
 import { TeachersComponent } from './teachers/teachers.component';
 import { SubjectsComponent } from './subjects/subjects.component';
+import { SubjectFormComponent } from './subject-form/subject-form.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TeacherFormComponent } from './teacher-form/teacher-form.component';
+import { AsignSubjectToTeacherFormComponent } from './asign-subject-to-teacher-form/asign-subject-to-teacher-form.component';
+import { RemoveSubjectComponent } from './remove-subject/remove-subject.component';
 
 
 @NgModule({
@@ -42,7 +47,11 @@ import { SubjectsComponent } from './subjects/subjects.component';
     StudentFormComponent,
     GroupFormComponent,
     SubjectsComponent,
-
+    SubjectFormComponent,
+    TeacherFormComponent,
+    AsignSubjectToTeacherFormComponent,
+    RemoveSubjectComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -62,6 +71,7 @@ import { SubjectsComponent } from './subjects/subjects.component';
     MatListModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatTooltipModule
 
   ],
   providers: [],
