@@ -5,6 +5,7 @@ import { MatSelectChange } from '@angular/material/select';
   selector: 'app-drop-down-list',
   templateUrl: './drop-down-list.component.html',
   styleUrls: ['./drop-down-list.component.scss'],
+  
 })
 export class DropDownListComponent {
   @Input() items: any[] = [];

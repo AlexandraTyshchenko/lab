@@ -33,6 +33,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { TeacherFormComponent } from './teacher-form/teacher-form.component';
 import { AsignSubjectToTeacherFormComponent } from './asign-subject-to-teacher-form/asign-subject-to-teacher-form.component';
 import { RemoveSubjectComponent } from './remove-subject/remove-subject.component';
+import { ScheduleItemComponent } from './schedule-item/schedule-item.component';
+import { LessonComponent } from './lesson/lesson.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { RemoveSubjectComponent } from './remove-subject/remove-subject.componen
     TeacherFormComponent,
     AsignSubjectToTeacherFormComponent,
     RemoveSubjectComponent,
+    ScheduleItemComponent,
+    LessonComponent
     
   ],
   imports: [
@@ -71,7 +75,7 @@ import { RemoveSubjectComponent } from './remove-subject/remove-subject.componen
     MatListModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatTooltipModule
+    MatTooltipModule,
 
   ],
   providers: [],

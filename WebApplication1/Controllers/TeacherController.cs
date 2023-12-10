@@ -13,16 +13,19 @@ namespace WebApplication1.Controllers
         private readonly ITeachersGetter _teachersGetter;
         private readonly IMapper _mapper;
         private readonly ISubjectTeacherDeletter _subjectTeacherDeletter;
+        private readonly ITeacherDeletter _teacherDeletter;
 
         public TeacherController(ITeacherCreator teacherCreator, 
             ITeachersGetter teachersGetter, IMapper mapper,
-            ISubjectTeacherDeletter subjectTeacherDeletter
+            ISubjectTeacherDeletter subjectTeacherDeletter,
+            ITeacherDeletter   teacherDeletter
             )
         {
             _teacherCreator = teacherCreator;
             _teachersGetter = teachersGetter;
             _mapper = mapper;
             _subjectTeacherDeletter= subjectTeacherDeletter;
+            _teacherDeletter= teacherDeletter;
         }
 
         [HttpPost]
@@ -49,9 +52,16 @@ namespace WebApplication1.Controllers
         }
 
         [HttpDelete("teacherSubject")]
-        public async Task<IActionResult> DeleteSubject(int teacherId, int subjectId)
+        public async Task<IActionResult> DeleteSubject([FromQuery] SubjectTeacherParameters subjectTeacherParameters)
         {
-            await _subjectTeacherDeletter.DeleteSubjectAsync(teacherId, subjectId);
+            await _subjectTeacherDeletter.DeleteSubjectAsync(subjectTeacherParameters.teacherId, subjectTeacherParameters.subjectId);
+            return Ok();
+        }
+
+        [HttpDelete("TeacherById")]
+        public async Task<IActionResult> DeleteTeacherById(int id)
+        {
+            await _teacherDeletter.DeleteTeacherAsync(id);
             return Ok();
         }
     }

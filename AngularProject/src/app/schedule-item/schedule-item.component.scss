@@ -1,0 +1,24 @@
+.demo-table {
+    width: 100%;
+  }
+  .material-icons:hover {
+    cursor: pointer;
+  }
+  .mat-column-number {
+    width: 32px;
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    text-align: center;
+  }
+  
+  .mat-column-subjectAndTeacher {
+    padding-left: 16px;
+    font-size: 20px;
+  }
+
+  .mat-column-classroom {
+    width: 32px;
+    text-align: center;
+    font-weight: bold;
+  }
+  

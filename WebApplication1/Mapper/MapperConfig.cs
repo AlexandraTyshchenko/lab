@@ -20,6 +20,13 @@ namespace WebApplication1.Mapper
             CreateMap<Subject, SubjectModel>();
             CreateMap<Teacher, TeacherModelWithSubjectKeys>()
                .ForMember(dest => dest.Subjects, opt => opt.MapFrom(src => src.Subjects.Select(st => st.Subject)));
+            CreateMap<SubjectTeacher, SubjectTeacherModel>()
+                .ForMember(dest => dest.SubjectName, opt => opt.MapFrom(src => src.Subject.Name))
+                .ForMember(dest => dest.TeacherName, opt => opt.MapFrom(src => src.Teacher.Name));
+            CreateMap<Schedule, Lesson>()
+                .ForMember(x => x.TeacherName, opt => opt.MapFrom(src => src.SubjectTeacher.Teacher.Name))
+                .ForMember(x => x.SubjectName, opt => opt.MapFrom(src => src.SubjectTeacher.Subject.Name));
+
         }
     }
 }

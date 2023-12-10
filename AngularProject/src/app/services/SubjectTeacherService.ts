@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { API_BASE_URL } from "src/config";
 
@@ -21,9 +21,11 @@ export class SubjectTeacherService {
     getTeacherWithSubjects(id:number): Observable<TeacherSubjects> {
         return this.http.get<TeacherSubjects>(`${API_BASE_URL}/api/Teacher/id?id=${id}`);
     }
-
-    deleteSubject(teacherId:number,subjectId:number){
-        return this.http.delete(`${API_BASE_URL}/api/Teachers/teacherSubject?teacherId=${teacherId}&subjectId=${subjectId}`);
+    deleteSubject(teacherId: number, subjectId: number): Observable<any> {
+        const params = new HttpParams()
+          .set('teacherId', teacherId.toString())
+          .set('subjectId', subjectId.toString());
+        const url = `${API_BASE_URL}/api/Teacher/teacherSubject`;
+        return this.http.delete(url, { params });
     }
-    
 }

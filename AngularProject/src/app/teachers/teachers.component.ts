@@ -13,7 +13,7 @@ import { RemoveSubjectComponent } from '../remove-subject/remove-subject.compone
 })
 export class TeachersComponent implements OnInit {
   teachers: Array<Teacher> = [];
-  displayedColumns: string[] = ['teacher', 'shortinfo', 'subjects'];
+  displayedColumns: string[] = ['teacher', 'shortinfo', 'subjects', 'id'];
 
   constructor(private teacherService: TeacherService, public dialog: MatDialog) {}
 
@@ -30,13 +30,21 @@ export class TeachersComponent implements OnInit {
     this.dialog.open(TeacherFormComponent, dialogConfig);
   }
 
-  removeSubject(teacherID:number){
+  deleteStudent(id: number) {
+    if (confirm('Are you sure to delete ')) {
+      this.teacherService.deleteTeachers(id).subscribe(() => {
+        this.getTeachers();
+      });
+    }
+  }
+
+  removeSubject(teacherID: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '60%';
     dialogConfig.data = {
-      teacherId:teacherID,
+      teacherId: teacherID,
       onConfirmation: () => {
         this.getTeachers();
       },

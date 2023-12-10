@@ -20,5 +20,7 @@ export class TeacherService {
         return this.http.post(`${API_BASE_URL}/api/Teacher`, formData);
     }
 
-    
+    deleteTeachers(id:number){
+      return this.http.delete(`${API_BASE_URL}/api/Teacher/TeacherById?id=${id}`);
+    }
 }
