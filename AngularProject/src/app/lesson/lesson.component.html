@@ -7,6 +7,9 @@
         <th >{{lesson.subjectName}}</th>
         <th >{{lesson.teacherName}}</th>
         <th > <span class="material-icons" (click)="edit()"><mat-icon>edit</mat-icon></span></th>
+        <th > <span class="material-icons" (click)="delete()">   <mat-icon>delete</mat-icon></span></th>
+
+     
     </div>
     <div *ngIf="toggle==true">
         <th >classroom: <input [(ngModel)]="classroom" matInput placeholder="Classroom"></th>

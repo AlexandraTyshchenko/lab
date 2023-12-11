@@ -15,12 +15,15 @@ namespace WebApplication1.Controllers
         private readonly IScheduleCreator _scheduleCreator;
         private readonly IScheduleProvider _scheduleProvider;
         private readonly Context _context;
+        private readonly IScheduleDeletter _scheduleDeletter;
 
-        public ScheduleController(IScheduleCreator scheduleCreator,Context context, IScheduleProvider scheduleProvider)
+        public ScheduleController(IScheduleCreator scheduleCreator,
+            Context context, IScheduleProvider scheduleProvider,IScheduleDeletter scheduleDeletter)
         {
             _scheduleCreator = scheduleCreator;
             _context = context;
             _scheduleProvider = scheduleProvider;
+            _scheduleDeletter = scheduleDeletter;
         }
 
         [HttpPut]
@@ -45,6 +48,13 @@ namespace WebApplication1.Controllers
         {
             var result =await  _scheduleProvider.GetScheduleAsync(groupId);
             return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteSchedule(int numberInOrder, Day day, int GroupId)
+        {
+            await _scheduleDeletter.DeleteSchedule(numberInOrder, day, GroupId);
+            return Ok();
         }
 
     }

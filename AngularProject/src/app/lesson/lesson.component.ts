@@ -12,7 +12,7 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class LessonComponent implements OnInit {
   constructor(private scheduleService: ScheduleService,private subjectTeacherService:SubjectTeacherService) {}
-  @Input() lesson: Lesson = {day:0,groupId:0, numberInOrder:0,classroom:"",subjectName:"",teacherName:""};
+  @Input() lesson: Lesson = {day:-1,groupId:-1, numberInOrder:0,classroom:"",subjectName:"",teacherName:""};
   toggle = false;
   subjectTeacherID: number | undefined = undefined;
   edit() {
@@ -30,6 +30,13 @@ export class LessonComponent implements OnInit {
       error: (error) => {
         console.error('Error fetching data:', error);
       }
+    });
+  }
+  delete(){
+    this.scheduleService.deleteSchedule(this.lesson.numberInOrder,this.lesson.day,this.lesson.groupId).subscribe(() => {
+      this.lesson.classroom="";
+      this.lesson.subjectName="";
+      this.lesson.teacherName=""
     });
   }
 

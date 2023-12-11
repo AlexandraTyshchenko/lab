@@ -27,5 +27,7 @@ export class ScheduleService {
   
     return this.http.put(url, body);
   }
-  
+  deleteSchedule(numberInOrder:number,day:number,groupId:number){
+    return this.http.delete(`${API_BASE_URL}/api/Schedule?numberInOrder=${numberInOrder}&day=${day}&GroupId=${groupId}`);
+  }
 }
