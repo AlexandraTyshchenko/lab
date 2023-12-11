@@ -19,27 +19,47 @@ namespace WebApplication1.Services
             _context = context;
             _mapper = mapper;
         }
-
         public async Task<ScheduleModel> GetScheduleAsync(int groupId)
         {
-           var list =await _context.Schedules.Where(x => x.GroupId == groupId).
-                Include(x => x.SubjectTeacher).ThenInclude(x => x.Subject).Include(x => x.SubjectTeacher)
+
+            var list = await _context.Schedules.Where(x => x.GroupId == groupId)
+                .Include(x => x.SubjectTeacher).ThenInclude(x => x.Subject).Include(x => x.SubjectTeacher)
                 .ThenInclude(x => x.Teacher).ToListAsync();
+
             var mappedResult = _mapper.Map<List<Lesson>>(list);
             var schedulemodel = new ScheduleModel();
             schedulemodel.GroupId = groupId;
-            schedulemodel.Monday = mappedResult.Where(x=>x.Day == Day.Monday).
-                OrderBy(x=>x.NumberInOrder).ToList();
-            schedulemodel.Tuesday = mappedResult.Where(x => x.Day == Day.Tuesday).
-                OrderBy(x => x.NumberInOrder).ToList();
-            schedulemodel.Wednesday = mappedResult.Where(x => x.Day == Day.Wednesday).
-                OrderBy(x => x.NumberInOrder).ToList();
-            schedulemodel.Thursday = mappedResult.Where(x => x.Day == Day.Thursday)
-                .OrderBy(x => x.NumberInOrder).ToList();
-            schedulemodel.Friday = mappedResult.Where(x => x.Day == Day.Friday).
-                OrderBy(x => x.NumberInOrder).ToList(); 
+
+            FillDay(schedulemodel.Monday, mappedResult.Where(x => x.Day == Day.Monday).ToList(),  groupId,Day.Monday);
+            FillDay(schedulemodel.Tuesday, mappedResult.Where(x => x.Day == Day.Tuesday).ToList(), groupId, Day.Tuesday);
+            FillDay(schedulemodel.Wednesday, mappedResult.Where(x => x.Day == Day.Wednesday).ToList(), groupId, Day.Wednesday);
+            FillDay(schedulemodel.Thursday, mappedResult.Where(x => x.Day == Day.Thursday).ToList(), groupId, Day.Thursday);
+            FillDay(schedulemodel.Friday, mappedResult.Where(x => x.Day == Day.Friday).ToList(), groupId,Day.Friday);
             return schedulemodel;
         }
+
+        private void FillDay(List<Lesson> dayLessons, IEnumerable<Lesson> lessons, int groupId, Day day)
+        {
+            for (int i = 1; i <= 8; i++)
+            {
+                Lesson defaultLesson = new Lesson
+                {
+                    GroupId = groupId
+                };
+
+                Lesson lesson = lessons.FirstOrDefault(x => x.NumberInOrder == i);
+                if (lesson == null)
+                {
+                    defaultLesson.NumberInOrder = i;
+                    defaultLesson.Day = day;
+                    lesson = defaultLesson;
+                }
+                dayLessons.Add(lesson);
+            }
+
+            dayLessons.Sort((x, y) => x.NumberInOrder.CompareTo(y.NumberInOrder));
+        }
+
 
     }
 }

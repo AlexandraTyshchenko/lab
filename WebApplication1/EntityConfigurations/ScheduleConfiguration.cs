@@ -17,12 +17,12 @@ namespace WebApplication1.EntityConfigurations
             builder.HasOne(s => s.SubjectTeacher)
                 .WithMany(y => y.Schedules)
                 .HasForeignKey(s => s.SubjectTeacherId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(s => s.Group)
                 .WithMany(y => y.Schedules)
                 .HasForeignKey(s => s.GroupId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

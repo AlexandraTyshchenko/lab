@@ -5,10 +5,11 @@ namespace WebApplication1.DTOs
     public class ScheduleModel
     {
         public int GroupId { get; set; }
-        public IEnumerable<Lesson> Monday { get; set; }
-        public IEnumerable<Lesson> Tuesday { get; set; }
-        public IEnumerable<Lesson> Wednesday { get; set; }
-        public IEnumerable<Lesson> Thursday { get; set; }
-        public IEnumerable<Lesson> Friday { get; set; }
+        public List<Lesson> Monday { get; set; } = new List<Lesson>();
+        public List<Lesson> Tuesday { get; set; } = new List<Lesson>();
+        public List<Lesson> Wednesday { get; set; } = new List<Lesson>();
+        public List<Lesson> Thursday { get; set; } = new List<Lesson>();
+        public List<Lesson> Friday { get; set; } = new List<Lesson>();
     }
+
 }

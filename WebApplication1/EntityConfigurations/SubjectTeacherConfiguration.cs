@@ -14,11 +14,11 @@ namespace WebApplication1.EntityConfigurations
             builder.HasOne(s => s.Subject)
                .WithMany(g => g.SubjectTeachers)
                .HasForeignKey(s => s.SubjectId)
-               .OnDelete(DeleteBehavior.SetNull);
+               .OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(s => s.Teacher)
              .WithMany(g => g.Subjects)
              .HasForeignKey(s => s.TeacherId)
-             .OnDelete(DeleteBehavior.SetNull);
+             .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

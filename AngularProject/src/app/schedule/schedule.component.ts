@@ -19,9 +19,7 @@ export class ScheduleComponent implements OnInit {
     wednesday:Array<Lesson> = [];
     thursday:Array<Lesson> = [];
     friday:Array<Lesson> = [];
-    groupId:undefined|number=undefined;
     handleGroup(group:Group){
-      this.groupId=group.id;
       this.scheduleService.getSchedule(group.id).subscribe({
         next: (response:any) => {
           this.monday=response.monday;

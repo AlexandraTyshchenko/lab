@@ -9,7 +9,7 @@
         <th > <span class="material-icons" (click)="edit()"><mat-icon>edit</mat-icon></span></th>
     </div>
     <div *ngIf="toggle==true">
-        <th ><input [(ngModel)]="classroom" matInput placeholder="classroom" ></th>
+        <th >classroom: <input [(ngModel)]="classroom" matInput placeholder="Classroom"></th>
         <th > <mat-form-field>
             <mat-label> {{ currentItem }}</mat-label>
                 <mat-select (selectionChange)="onSelectionChange($event)">
