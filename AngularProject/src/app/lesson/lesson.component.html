@@ -1,3 +1,23 @@
-<p>lesson works!</p>
-   
-  
+
+<div *ngIf="lesson!==undefined">
+    <table>
+    <div *ngIf="toggle==false">
+        <th class="number">{{lesson.numberInOrder}}</th>
+        <th >{{lesson.classroom}}</th>
+        <th >{{lesson.subjectName}}</th>
+        <th >{{lesson.teacherName}}</th>
+        <th > <span class="material-icons" (click)="edit()"><mat-icon>edit</mat-icon></span></th>
+    </div>
+    <div *ngIf="toggle==true">
+        <th ><input [(ngModel)]="classroom" matInput placeholder="classroom" ></th>
+        <th > <mat-form-field>
+            <mat-label> {{ currentItem }}</mat-label>
+                <mat-select (selectionChange)="onSelectionChange($event)">
+                 <mat-option *ngFor="let item of subjectTeachers" [value]="item">{{ item.subjectName }} {{item.teacherName}}</mat-option>
+                 </mat-select>
+                 </mat-form-field></th>
+        <th><mat-icon (click)="confirm()">done_outline</mat-icon></th>
+        <th><mat-icon (click)="cancel()">cancel</mat-icon></th>
+    </div>
+</table>
+</div>

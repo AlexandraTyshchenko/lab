@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Group } from '../interfaces/group';
 import { GroupService } from '../services/GroupService';
 import { ScheduleService } from '../services/ScheduleService';
+import { Lesson } from '../interfaces/lesson';
 
 @Component({
   selector: 'app-schedule',
@@ -13,12 +14,21 @@ export class ScheduleComponent implements OnInit {
     currentGroup: string = "select group";
     constructor( private groupService:GroupService,private scheduleService:ScheduleService){}
     schedule:any;
-
+    monday:Array<Lesson> = [];
+    tuesday:Array<Lesson> = [];
+    wednesday:Array<Lesson> = [];
+    thursday:Array<Lesson> = [];
+    friday:Array<Lesson> = [];
+    groupId:undefined|number=undefined;
     handleGroup(group:Group){
+      this.groupId=group.id;
       this.scheduleService.getSchedule(group.id).subscribe({
         next: (response:any) => {
-         this.schedule=response;
-         console.log(this.schedule);
+          this.monday=response.monday;
+          this.tuesday=response.tuesday;
+          this.wednesday=response.wednesday;
+          this.thursday=response.thursday;
+          this.friday=response.friday;
         },
         error: (error) => {
           console.error('Error fetching data:', error);

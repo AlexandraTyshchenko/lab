@@ -1,7 +1,8 @@
 export interface Lesson {
-    id: number;
-    subject: string;
-    teacher:string;
-    classroom:string
-
+    day:number;
+    groupId:number;
+    numberInOrder:number;
+    classroom:string;
+    subjectName?: string,
+    teacherName?: string
 }

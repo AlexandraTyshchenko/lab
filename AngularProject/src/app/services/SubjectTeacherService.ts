@@ -4,6 +4,7 @@ import { API_BASE_URL } from "src/config";
 
 import { Observable } from 'rxjs';
 import { TeacherSubjects } from "../interfaces/teacherSubjects";
+import { SubjectTeacher } from "../interfaces/subjectTeacher";
 @Injectable({
     providedIn: 'root',
   })
@@ -27,5 +28,9 @@ export class SubjectTeacherService {
           .set('subjectId', subjectId.toString());
         const url = `${API_BASE_URL}/api/Teacher/teacherSubject`;
         return this.http.delete(url, { params });
+    }
+
+    getSubjectTeachers():Observable<SubjectTeacher>{
+        return this.http.get<SubjectTeacher>(`${API_BASE_URL}/api/SubjectTeacher`);
     }
 }

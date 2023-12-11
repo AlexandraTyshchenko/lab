@@ -1,22 +1,7 @@
-import {Component} from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
+import {Component, Input, OnInit} from '@angular/core';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+import { Lesson } from '../interfaces/lesson';
 
-const ELEMENT_DATA: PeriodicElement[] = Array(8).fill({
-  position: '',
-  name: '1232434324444444444444444444',
-  symbol: '23'
-});
-
-/**
- * @title Styling columns using their auto-generated column names
- */
 
 @Component({
   selector: 'app-schedule-item',
@@ -24,16 +9,23 @@ const ELEMENT_DATA: PeriodicElement[] = Array(8).fill({
   styleUrls: ['./schedule-item.component.scss'],
 
 })
-export class ScheduleItemComponent {
-  currentSubjectTeacher="select ";
-  toggle=false;
+export class ScheduleItemComponent implements OnInit  {
 
-  edit(){
-    this.toggle=true;
+  @Input() scheduleForDay: Array<Lesson>=[];
+  @Input() dayOfWeek ="Monday";
+  @Input() dayOfWeekIndex =0;
+  @Input() groupId=1;
+
+   defaultLesson:Lesson={
+    day:this.dayOfWeekIndex,
+   groupId:this.groupId,
+   numberInOrder:0,
+   classroom:"",
+   subjectName:"" ,
+   teacherName: ""
+   }
+
+  ngOnInit(): void {
+    
   }
-
-  subjectTeachers:Array<any>=[{name:"sdf"}]
-  handleSubjectTeacher(value:any){}
-  displayedColumns: string[] = ['number', 'subjectAndTeacher', 'classroom','edit'];
-  dataSource = ELEMENT_DATA;
 }

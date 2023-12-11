@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> CreateSchedule([FromQuery] ScheduleParameters scheduleParameters)
+        public async Task<IActionResult> CreateSchedule([FromBody] ScheduleParameters scheduleParameters)
         {
             await _scheduleCreator.CreateScheduleAsync(scheduleParameters.number,
                 scheduleParameters.subjectTeacherId, scheduleParameters.classroom,

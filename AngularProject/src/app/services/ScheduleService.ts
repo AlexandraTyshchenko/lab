@@ -1,4 +1,4 @@
-import { HttpClient} from "@angular/common/http";
+import { HttpClient, HttpParams} from "@angular/common/http";
 import { Student } from "../interfaces/student";
 import { Observable } from 'rxjs';
 import { Injectable } from "@angular/core";
@@ -14,5 +14,18 @@ export class ScheduleService {
   getSchedule(groupId: number): Observable<any> {
     return this.http.get<any>(`${API_BASE_URL}/api/Schedule?groupId=${groupId}`);
   }
-
+  
+  addLesson(number: number, subjectTeacherId: number, classroom: string, groupId: number, day: number) {
+    const url = `${API_BASE_URL}/api/Schedule`;
+    const body = {
+      number: number,
+      subjectTeacherId: subjectTeacherId,
+      classroom: classroom,
+      groupId: groupId,
+      day: day
+    };
+  
+    return this.http.put(url, body);
+  }
+  
 }

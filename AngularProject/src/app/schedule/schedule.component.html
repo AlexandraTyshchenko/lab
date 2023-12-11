@@ -1,3 +1,4 @@
 <p>schedule works!</p>
 
 <app-drop-down-list (valueChanged)="handleGroup($event)" [items]="groups" class="dropdown" [currentItem]="currentGroup"></app-drop-down-list>
+<app-schedule-item *ngIf = "groupId!==undefined" [groupId] = "groupId" [scheduleForDay]="monday" [dayOfWeek]="'Monday'" [dayOfWeekIndex]="0"></app-schedule-item>
